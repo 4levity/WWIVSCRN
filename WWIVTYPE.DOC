@@ -1,0 +1,17 @@
+WWIVType.EXE
+Version 2.0
+Minor bug fixes from version 1.5
+By Ivan Cooper
+This program is distributed as part of WWIV Screenedit 2.0.
+
+
+This program displays WWIV format files. To use it, just type:
+
+WWIVTYPE [drive][directory][filename/mask]
+
+It will use the colors and mode specified in the DEFAULTS.WWS file if it exists
+in the current directory.  Otherwise the default colors will be used.
+If you dont put in a parameter, the current directory will be displayed, and
+you will be prompted for a pathname.
+
+

@@ -1,0 +1,238 @@
+--==[[ WWIV Screenedit ]]==-- By Ivan Cooper                             Page 1
+
+Introduction:
+
+What is WWIV Screenedit?
+WWIV screenedit is a program for IBM compatible computers which is designed
+to make menus or screens for a WWIV BBS.  It is similar in operation to the
+ANSI editor TheDraw (copyright TheSoft), but saves its pictures in either WWIV
+or text format (more on these later).
+
+Why don't I use TheDraw, or some other ANSI editor?
+Well you could use them, but this has advantages over any other color screen
+editor in that it is designed for use with WWIV (although pictures saved in
+TEXT format can be used with anything you please) --
+ * For every actual line of text, one line is generated. What this means is
+   that ANSI codes are not used to advance to the next line, it just uses
+   a cr/lf.  Therefore it saves the disk space used by the ANSI code to advance
+   to the next line, and it can be viewed in a scroll back buffer.
+
+ * The user's custom color setup is used in the screen. This means that if
+   the user has mono, the mono colors will be used in the screen, if he has
+   NO ansi, then the screen won't be colored, or if the user just prefers a
+   particular color combination it is used.
+
+ * The WWIV color codes take up (here's the key words) A LOT LESS SPACE than
+   ansi color change codes!
+
+ * Screenedit allows you to load and save menu files DIRECTLY to and from
+   MENUSANS.MSG/MENUS.MSG, the menu files for WWIV.
+
+Now isn't that great?  Well, I guess I'll JUST HAVE TO tell you the downside(s)
+of using my most excellent program:
+-Not as many color combinations. You only get the 8 that the user has set up in
+ his defaults (Or if you have the 2 extra colors mod, you get 10).  You can get
+ 255 (16 foreground colors, 8 background colors, and blinking on/off) with
+ normal ANSI.
+-No animation. The only thing you can do is change colors.
+-My program doesnt have all the nifty features of a program like TheDraw, and
+ some of the features aren't nearly as fast.
+--==[[ WWIV Screenedit ]]==-- By Ivan Cooper                             Page 2
+
+(note: Excuse my rotten documentation.)
+Ok, now all of this stuff:
+
+WWIV Screenedit 3.2 was written on a RYNO XT Clone with Turbo Pascal v5.5 by
+Ivan Cooper.  The source code is 74,633 bytes.  (I put the block functions
+in an include file)
+
+Distribution: This program is in the public domain. It may be distributed
+freely, but no fee may be charged (except a distribution fee to cover costs)
+for the program, and the files WWIVSCRN.EXE, WWIVSCRN.DOC, WWIVTYPE.EXE, and
+WWIVTYPE.DOC should be distributed together.
+
+How to contact me:
+You can contact me at this address:
+-------------------------
+Cooper
+57 Cleaveland Rd. #14
+Pleasant Hill, CA  94523
+
+1-(415)-798-2742
+-------------------------
+
+Source Code:
+If you really need the source code, give me a call and I'll see what I can do.
+
+Version History:
+
+Version:  Updates/bug fixes:
+--------  --------------------------------------------
+
+1.0       Original version.
+2.0       Added 2 extra colors, Mono color set, and the ability to read from
+          the WWIV menu files.  Also, it now checks for free disk space before
+          saving.
+2.1       Quick bug fix from 2.0
+3.0       Added a lot of speed optimizations, more special effects, use of
+          status message, more block options, ability to save directly to
+          menufiles, mark bottom line, and menufile directory. MAKEMSG is not
+          included anymore.
+3.2       A few bug fixes, improved WWIVTYPE, and VIEW now can view menu files.
+
+
+--==[[ WWIV Screenedit ]]==-- By Ivan Cooper                             Page 3
+
+Starting WWIV Screenedit:
+Note! If you're upgrading from 1.0, DELETE the DEFAULTS.WWS file! The format
+is changed in version 2 (v3.0 WILL use the defaults file from 2.x).  Also,
+Remember, if you DON'T have the 2 extra colors mod in on your BBS, DONT use
+either of the 'extra' colors! Well, in case you hadn't already guessed, type
+WWIVSCRN at your dos prompt. When you start it for the first time, it will
+create a file called DEFAULTS.WWS. This file contains the default color setup,
+default mono setup, name of the file to automatically load, default mode
+(color/mono), and whether or not you want special effects.
+
+Cursor Movement:
+You can use the 4 arrow keys to move the cursor around, and in addition the
+following keys may be used to postion the cursor:
+
+Home     Go to the start of the line     End      Go to the end of the line
+PgUp     Go to the bottom of the screen  PgDn     Go to the top of the screen
+CtrlHome Go to the top left corner       CtrlEnd  Go to the bottom left corner
+CtrlPgUp Go to the top right corner      CtrlPgDn Go to the bottom right corner
+
+
+Status display:
+Once the program is started, the first 23 rows of the screen are blank
+(assuming that you havent changed your default autofile) and the bottom 2 lines
+look something like this:
+
+WWIV Screenedit!  Color  Version 3.0 - Press ALT-H for help  File:   NONAME.ANS
+( 1, 1)  Color 0 Ovr  Set 1: F1=Ú F2=¿ F3=À F4=Ù F5=Ä F6=³ F7=Ã F8=´ F9=Á F10=Â
+
+The coordinates are displayed in the form '( x, y)'.  The 'Color x' message
+signifys the current drawing color (or 'Extra x' if you are using color #8 or
+#9), and is displayed in that color. The 'Ovr' message signifys Overwrite mode,
+and can be toggled to 'Ins' (insert mode) by pressing the Ins key.  Next, you
+see the current fkey set. The function key sets are so that you can use the
+extended ascii codes without having to actually enter them. Each function key
+(1-10) stands for an extended ascii character.  Press Alt-F to see the 10
+different fkey sets, and ALT-F(1-10) to select a new set.  Then, there's my
+little special effect thinggy (you CAN turn it off if it annoys you), the
+status message, and the name of whatever file is currently loaded (defaults to
+NONAME.ANS, or the name of the autofile if the autofile exists).
+
+Hotkeys:
+Alt-A     Select one of the 10 colors (dont use 8 & 9 if you dont have the 2
+          extra colors mod!)
+Alt-B     Block functions: Copy/Move/Erase/Fill (with character or color)
+Alt-C     Clear the image
+Alt-D     Alter the color or mono sets(depending on the current mode).
+          Note: When the defaults file is first created, colors 0-7 are set up
+          for the default colors for WWIV BBSs (colors 8 & 9 are also set up,
+          but I dont really know what the defaults for those are, so you will
+          prbably have to change those 2). So, you should generally keep 0-7
+          as they are, so that they will appear correctly on users with their
+          colors set up to the WWIV default. However, if you have put in a mod
+          of some sort that changes WWIV's default colors for new users with
+          ansi, then change these accordingly. Remember, no matter HOW you have
+          this set up, the picture will be viewed in the colors of whatever
+          user is viewing the picture.
+--==[[ WWIV Screenedit ]]==-- By Ivan Cooper                             Page 4
+
+Alt-E     Edit Setup. This option allows you to turn my special effect on or
+          off, choose a file that will be automatically loaded (if it exists
+          in the directory you started the program in), select default mode
+          (color or mono), and set up the default color set and mono set,
+          which are loaded when you start the program, or press Alt-O. If you
+          change the colors, and dont want to hassle changing them back, just
+          exit the program and delete DEFAULTS.WWS.
+Alt-F     Show all the function key sets.
+Alt-H     Display help screen
+Alt-I     Insert a line at cursor position. Warning! The bottom line will be
+          lost!
+Alt-J     Jump to DOS temporarily
+Alt-K     Save current picture to WWIV Menu file
+Alt-L     Load a screen
+Alt-M     Toggle between Color and Mono mode
+Alt-N     Ruler
+Alt-O     Reset color setup to starting defaults
+Alt-R     Draw a rectangle
+Alt-S     Save the current screen
+Alt-T     Center a line of text
+Alt-U     Switch to the color under the cursor
+Alt-V     View a file. Just shows a WWIV Screenedit file on the screen, but
+          keeps the current picture in memory.
+Alt-W     Show list of menus stored in a WWIV menufile
+Alt-X     Exit WWIV Screenedit
+Alt-Y     Delete current line
+Alt-Z     Load a menu from a WWIV menufile
+Ctrl Left/Right    Up/Down one color
+
+Other useful keys:
+Ins         Toggle between Insert and Overwrite mode- In insert mode, any
+            characters will be inserted at the current cursor position, and in
+            overwrite mode, the character at the cursor position will be
+            written over.
+Del         Delete the character at the cursor postion
+Alt-F(1-10) Select function key set 1-10
+
+Enter       Move to the first column of the next line. If insert is on, then
+            a line will be inserted and the rest of the current line will be
+            moved to the start of the next line.
+
+Any ASCII character from ascii #32 to #255 will be placed at the cursor
+position. (if in insert mode, the rest of the line will be moved right)
+
+When you save a file, it will ask you to move the cursor to the bottom line
+of the screen-On a picture/menu that doesnt go to the bottom line of the
+screen (row 23), move the cursor to the last row used by the menu. Otherwise
+just move to the bottom row of the screen.  The X position doesn't matter.
+
+Well, since I'm going to assume that you can figure it out from that, (it
+works very much like TheDraw) ... That's all, folks!
+--==[[ WWIV Screenedit ]]==-- By Ivan Cooper                             Page 5
+
+-------------------------------------------------------------------------------
+                          Technical file information:
+-------------------------------------------------------------------------------
+TEXT format:
+The files are just written to disk in ASCII format, no colors.
+
+WWIV format:
+To make a color change, an ASCII #3 (^C) and a digit from 0-9 is used (to
+signify which of the colors to change to).  Note that the color setup info
+is not saved in the file, so if one user has his colors set up differently
+than another, the file will look different to each of them. This works the
+same way as a ^P-x in posting a message.  Consequently, a user with MONO
+will get the mono color set, and a user with no ansi at all will not get any
+colors.
+
+
+Note- WWIV also uses another character, ascii #2 in the first column, which is
+      used to signify that the line is centered.  WWIV Screenedit CAN
+      understand these when loading, but does not use them when saving.
+      If you know of any other WWIV special character codes, tell me so that
+      I can implement them in the next version.
+
+
+Size optimization:
+WWIV Screenedit will try to optimize the file somewhat, to make the output
+file as small as possible.  On each line, it writes every character and color
+change up to the point where there are no more characters except spaces, and
+those spaces have a zero background color (this means that the color setup IS
+used, to see if the background colors of the spaces are zero).  I plan to add
+more optimizations later on, and use the #2 (center line) character in saving.
+
+WWIV Menufiles:
+In a WWIV menu file, the menus are stored like this:
+
+`0============================================================================
+<menu #0 here>
+`1============================================================================
+<menu #1 here>
+etc
+
+Read WWIVINIT.DOC, page 17, for more info on WWIV menus.
+
